@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Drives Interactive Improvement from Feedback?</title>
+    <meta
+      name="description"
+      content="A controlled student-teacher evaluation of natural-language feedback across Omni-MATH, Codeforces, BBEH Linguini, and ARC-AGI1."
+    />
+    <meta property="og:title" content="What Drives Interactive Improvement from Feedback?" />
+    <meta
+      property="og:description"
+      content="Multi-turn improvement is not always feedback use. We separate feedback from repeated attempts in controlled student-teacher evaluations."
+    />
+    <meta property="og:type" content="website" />
+    <link rel="stylesheet" href="styles.css?v=6" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Back to top">
+        <span class="brand-mark"></span>
+        <span>Feedback Bottleneck</span>
+      </a>
+      <div class="header-actions">
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="#motivation">Motivation</a>
+          <a href="#findings">Findings</a>
+          <a href="#setup">Setup</a>
+          <a href="#results">Results</a>
+          <a href="#resources">Resources</a>
+        </nav>
+        <div class="theme-toggle" role="group" aria-label="Color theme">
+          <button type="button" data-theme-option="dark" aria-label="Dark theme">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M20.5 14.4A7.3 7.3 0 0 1 9.6 3.5a8.7 8.7 0 1 0 10.9 10.9Z" />
+            </svg>
+          </button>
+          <button type="button" data-theme-option="system" aria-label="System theme">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <rect x="4" y="5" width="16" height="11" rx="1.8" />
+              <path d="M9 20h6M12 16v4" />
+            </svg>
+          </button>
+          <button type="button" data-theme-option="light" aria-label="Light theme">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="4.3" />
+              <path d="M12 2.8v2.1M12 19.1v2.1M4.1 4.1l1.5 1.5M18.4 18.4l1.5 1.5M2.8 12h2.1M19.1 12h2.1M4.1 19.9l1.5-1.5M18.4 5.6l1.5-1.5" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Controlled student-teacher feedback evaluation</p>
+          <h1>What Drives Interactive Improvement from Feedback?</h1>
+          <p class="lead">
+            In multi-turn tasks, a model can get another attempt after receiving feedback. The hard
+            question is whether it improved because the feedback was useful, or simply because it got
+            more inference time. We isolate that difference across four verifiable reasoning
+            environments and thirteen open-weight model families.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="assets/paper.pdf?v=publication">Read paper</a>
+            <a class="button" href="#findings">View findings</a>
+          </div>
+          <dl class="hero-stats" aria-label="Paper scale">
+            <div>
+              <dt>4</dt>
+              <dd>environments</dd>
+            </div>
+            <div>
+              <dt>13 x 13</dt>
+              <dd>student-teacher matrices</dd>
+            </div>
+            <div>
+              <dt>K=10</dt>
+              <dd>interactive attempts</dd>
+            </div>
+          </dl>
+        </div>
+        <figure class="hero-figure">
+          <a class="figure-link" href="assets/full/gain_student_teacher_spread.png">
+            <img
+              src="assets/gain_student_teacher_spread.png"
+              alt="Student and teacher role means showing that student identity explains more gain variation."
+            />
+          </a>
+          <figcaption>
+            Student identity explains substantially more gain variation than teacher identity across
+            environments.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="motivation" class="section split" aria-labelledby="motivation-title">
+        <div>
+          <div class="section-label">Motivation</div>
+          <h2 id="motivation-title">Feedback is becoming a training signal, but the loop itself is under-measured.</h2>
+          <p>
+            Interactive feedback is attractive because it resembles how people debug math solutions,
+            programs, and plans: try, observe what failed, revise, and try again. That same loop could
+            become a way to train models that follow instructions and recover from mistakes in
+            context.
+          </p>
+          <p>
+            The missing piece is diagnostic. Most work focuses on the final student, the stronger
+            model being distilled, or the verifier. We instead ask what happens inside the feedback
+            step: when does a teacher's message contain information the student can actually use?
+          </p>
+        </div>
+        <div class="story-card">
+          <h3>Evaluation setting</h3>
+          <p>
+            We evaluate a simple interaction: a student attempts a task, a verifier checks it, a
+            teacher gives feedback, and the student retries from the same task. The study separates
+            three effects that are easy to conflate.
+          </p>
+          <ol>
+            <li>Repeated attempts without real feedback.</li>
+            <li>The student's ability to act on feedback.</li>
+            <li>The teacher's ability to diagnose the failed attempt.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section compact" aria-labelledby="abstract-title">
+        <div class="section-label">Abstract</div>
+        <div class="abstract-card">
+          <h2 id="abstract-title">Multi-turn improvement is not always feedback use.</h2>
+          <p>
+            We introduce a controlled student-teacher protocol across Omni-MATH, Codeforces, BBEH
+            Linguini, and ARC-AGI1. We compare external feedback, self-feedback, and unguided
+            self-refinement while varying interaction history, task difficulty, and teacher access to
+            privileged task information.
+          </p>
+          <p>
+            Across settings, self-generated feedback often adds little beyond retrying from scratch,
+            while the strongest external teachers produce substantially larger feedback-specific
+            gains. Dense model matrices show that interactive gains are driven more by the student's
+            ability to use feedback than by the teacher's identity.
+          </p>
+        </div>
+      </section>
+
+      <section id="findings" class="section" aria-labelledby="findings-title">
+        <div class="section-heading">
+          <div>
+            <div class="section-label">Research findings</div>
+            <h2 id="findings-title">What matters for improvement from feedback?</h2>
+          </div>
+          <p>
+            Six targeted findings separate repeated attempts, student feedback uptake, teacher
+            quality, history length, and privileged task information.
+          </p>
+        </div>
+
+        <div class="finding-grid">
+          <article class="finding-card">
+            <span>RF1</span>
+            <h3>Feedback-specific gains require better-than-generic guidance.</h3>
+            <p>
+              Self-feedback is inconsistent relative to self-refinement. The best external teachers
+              add 9.2 to 16.6 acc@10 points over self-refinement across environments.
+            </p>
+          </article>
+          <article class="finding-card">
+            <span>RF2</span>
+            <h3>First-turn accuracy and feedback adherence are distinct.</h3>
+            <p>
+              A strong first attempt does not guarantee strong recovery. Models with similar acc@1 can
+              differ sharply in normalized gain from feedback.
+            </p>
+          </article>
+          <article class="finding-card">
+            <span>RF3</span>
+            <h3>Interactive performance is mostly student-dependent.</h3>
+            <p>
+              Student fixed effects explain 77.1% to 96.5% of pair-level gain variation, while teacher
+              identity adds only a small increment after conditioning on the student.
+            </p>
+          </article>
+          <article class="finding-card">
+            <span>RF4</span>
+            <h3>Task competence is not the same as teaching competence.</h3>
+            <p>
+              A teacher that solves more tasks on turn one is not always the better interactive
+              teacher. Diagnosing the student's specific error is a separate capability.
+            </p>
+          </article>
+          <article class="finding-card">
+            <span>RF5</span>
+            <h3>Longer histories are mostly flat in the completed Gemma4 grid.</h3>
+            <p>
+              Extra visible turns can expose repeated failures, but the completed Gemma4 ablation shows
+              near-flat average AUC from max history 1 to 5 across the four environments.
+            </p>
+          </article>
+          <article class="finding-card">
+            <span>RF6</span>
+            <h3>Privileged teacher information is not uniformly useful.</h3>
+            <p>
+              Answer access strongly helps BBEH Linguini, barely moves ARC-AGI1, and gives moderate
+              gains on Omni-MATH and Codeforces execution-feedback variants.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="setup" class="section split" aria-labelledby="setup-title">
+        <div>
+          <div class="section-label">Protocol</div>
+          <h2 id="setup-title">A verifier-grounded feedback loop.</h2>
+          <p>
+            In each episode, a student attempts a task. A task-specific verifier checks the answer. If
+            the answer is wrong, a teacher sees the latest attempt, selected interaction history, and
+            optional privileged information, then writes natural-language feedback. The student tries
+            again until success or the interaction budget is exhausted.
+          </p>
+          <div class="pill-row" aria-label="Evaluation environments">
+            <span>Omni-MATH</span>
+            <span>Codeforces</span>
+            <span>BBEH Linguini</span>
+            <span>ARC-AGI1</span>
+          </div>
+        </div>
+        <figure class="figure-card">
+          <a class="figure-link" href="assets/experimental_setup.png">
+            <img
+              src="assets/experimental_setup.png"
+              alt="Diagram of the student, teacher, verifier, and environment feedback loop."
+            />
+          </a>
+        </figure>
+      </section>
+
+      <section id="results" class="section" aria-labelledby="results-title">
+        <div class="section-heading">
+          <div>
+            <div class="section-label">Results</div>
+            <h2 id="results-title">Repeated attempts are a strong baseline.</h2>
+          </div>
+          <p>
+            We report acc@1, acc@10, gain, normalized gain, and cumulative accuracy AUC from episode
+            logs. The summary below separates retry, self-feedback, and best external feedback; the
+            additional plots show the latest completed Gemma4 ablations.
+          </p>
+        </div>
+
+        <div class="table-wrap" role="region" aria-label="Feedback control table" tabindex="0">
+          <table>
+            <thead>
+              <tr>
+                <th>Environment</th>
+                <th>Self-refinement</th>
+                <th>Self-feedback</th>
+                <th>Best feedback</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Omni-MATH</th>
+                <td>43.9 (+20.7)</td>
+                <td>48.6 (+24.7)</td>
+                <td>60.5 (+36.9)</td>
+              </tr>
+              <tr>
+                <th>Codeforces</th>
+                <td>52.8 (+17.8)</td>
+                <td>56.9 (+23.8)</td>
+                <td>68.7 (+35.1)</td>
+              </tr>
+              <tr>
+                <th>BBEH Linguini</th>
+                <td>12.0 (+7.6)</td>
+                <td>10.8 (+7.7)</td>
+                <td>21.2 (+17.5)</td>
+              </tr>
+              <tr>
+                <th>ARC-AGI1</th>
+                <td>18.2 (+11.6)</td>
+                <td>26.9 (+17.1)</td>
+                <td>33.2 (+23.1)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="figure-grid">
+          <figure class="figure-card wide">
+            <a class="figure-link" href="assets/full/student_acc1_vs_gain_scatter.png">
+              <img
+                src="assets/student_acc1_vs_gain_scatter.png"
+                alt="Scatter plot showing first-turn accuracy versus normalized gain."
+              />
+            </a>
+            <figcaption>
+              First-turn accuracy and feedback uptake are separate capabilities.
+            </figcaption>
+          </figure>
+          <figure class="figure-card">
+            <a class="figure-link" href="assets/full/marginal_gain_by_turn_all_envs.png">
+              <img
+                src="assets/marginal_gain_by_turn_all_envs.png"
+                alt="Marginal gain by turn across environments."
+              />
+            </a>
+            <figcaption>Most gains arrive in the first few turns.</figcaption>
+          </figure>
+          <figure class="figure-card">
+            <a class="figure-link" href="assets/full/student_cumulative_accuracy_curves.png">
+              <img
+                src="assets/student_cumulative_accuracy_curves.png"
+                alt="Cumulative accuracy curves for student models."
+              />
+            </a>
+            <figcaption>Interactive trajectories reveal model-specific recovery behavior.</figcaption>
+          </figure>
+          <figure class="figure-card">
+            <a class="figure-link" href="assets/full/gemma4_history_auc_k10.png">
+              <img
+                src="assets/gemma4_history_auc_k10.png"
+                alt="Gemma4 history ablation showing AUC at K=10 across Omni-MATH, Codeforces, BBEH Linguini, and ARC-AGI."
+              />
+            </a>
+            <figcaption>
+              Max-history 1 to 5 is largely flat in the completed Gemma4 ablation.
+            </figcaption>
+          </figure>
+          <figure class="figure-card">
+            <a class="figure-link" href="assets/full/gemma4_teacher_information_auc_k10.png">
+              <img
+                src="assets/gemma4_teacher_information_auc_k10.png"
+                alt="Teacher information access ablation showing large BBEH benefit, small Codeforces and Omni-MATH effects, and no ARC-AGI effect."
+              />
+            </a>
+            <figcaption>
+              Teacher-side information helps selectively: large on BBEH, essentially zero on ARC-AGI.
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="matrices-title">
+        <div class="section-heading">
+          <div>
+            <div class="section-label">Dense matrices</div>
+            <h2 id="matrices-title">Every model acts as both student and teacher.</h2>
+          </div>
+          <p>
+            The dense 13 x 13 matrices make the role asymmetry visible: rows often dominate columns,
+            showing that the student receiving feedback explains most interactive gain variation.
+          </p>
+        </div>
+        <div class="matrix-grid">
+          <figure class="figure-card">
+            <a class="figure-link" href="assets/full/matrix_omni_math.png">
+              <img src="assets/matrix_omni_math.png" alt="Omni-MATH student-teacher matrix." />
+            </a>
+            <figcaption>Omni-MATH</figcaption>
+          </figure>
+          <figure class="figure-card">
+            <a class="figure-link" href="assets/full/matrix_codeforces.png">
+              <img src="assets/matrix_codeforces.png" alt="Codeforces student-teacher matrix." />
+            </a>
+            <figcaption>Codeforces</figcaption>
+          </figure>
+          <figure class="figure-card">
+            <a class="figure-link" href="assets/full/matrix_bbeh_linguini.png">
+              <img src="assets/matrix_bbeh_linguini.png" alt="BBEH Linguini student-teacher matrix." />
+            </a>
+            <figcaption>BBEH Linguini</figcaption>
+          </figure>
+          <figure class="figure-card">
+            <a class="figure-link" href="assets/full/matrix_arc_agi1.png">
+              <img src="assets/matrix_arc_agi1.png" alt="ARC-AGI1 student-teacher matrix." />
+            </a>
+            <figcaption>ARC-AGI1</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section split reverse" aria-labelledby="takeaway-title">
+        <div>
+          <div class="section-label">Takeaway</div>
+          <h2 id="takeaway-title">Evaluate feedback against retry.</h2>
+          <p>
+            Multi-turn success is not enough evidence that feedback was useful. A controlled
+            evaluation should compare against unguided self-refinement, measure recovery from failed
+            first attempts, and separate the teacher's ability to diagnose from the student's ability
+            to act on feedback.
+          </p>
+          <ul class="check-list">
+            <li>Report repeated-attempt baselines before claiming feedback use.</li>
+            <li>Track student and teacher effects separately.</li>
+            <li>Treat privileged answers, solutions, and execution traces as upper-bound ablations.</li>
+            <li>Use shorter high-quality trajectories when most gain is front-loaded.</li>
+          </ul>
+        </div>
+        <div class="summary-card">
+          <h3>Pair-level gain variation</h3>
+          <dl>
+            <div>
+              <dt>77.1%-96.5%</dt>
+              <dd>Explained by student fixed effects</dd>
+            </div>
+            <div>
+              <dt>1.3%-12.4%</dt>
+              <dd>Explained by teacher fixed effects</dd>
+            </div>
+            <div>
+              <dt>70.8%-86.8%</dt>
+              <dd>Gain recovered by K=5</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section id="resources" class="section resources" aria-labelledby="resources-title">
+        <div>
+          <div class="section-label">Resources</div>
+          <h2 id="resources-title">Paper artifacts</h2>
+          <p>
+            Project page for the publication, with the paper, code, evaluation protocol, and
+            main result figures in one place.
+          </p>
+        </div>
+        <div class="resource-links">
+          <a href="assets/paper.pdf?v=publication">Paper PDF</a>
+          <a href="https://github.com/BartekCupial/plan-crl">Code</a>
+          <a href="#setup">Evaluation protocol</a>
+          <a href="#results">Main figures</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>What Drives Interactive Improvement from Feedback?</p>
+      <p>Project page for the paper and evaluation framework.</p>
+    </footer>
+    <div class="lightbox" aria-hidden="true">
+      <button class="lightbox-backdrop" type="button" aria-label="Close expanded figure"></button>
+      <figure class="lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+        <div class="lightbox-toolbar">
+          <figcaption id="lightbox-title">Expanded figure</figcaption>
+          <button class="lightbox-close" type="button" aria-label="Close expanded figure">
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="M6 6l12 12M18 6 6 18" />
+            </svg>
+          </button>
+        </div>
+        <div class="lightbox-media">
+          <img class="lightbox-image" alt="" />
+        </div>
+      </figure>
+    </div>
+    <script src="script.js?v=6"></script>
+  </body>
+</html>
+
