@@ -14,7 +14,7 @@
       content="Multi-turn improvement is not always feedback use. We separate feedback from repeated attempts in controlled student-teacher evaluations."
     />
     <meta property="og:type" content="website" />
-    <link rel="stylesheet" href="styles.css?v=6" />
+    <link rel="stylesheet" href="styles.css?v=7" />
   </head>
   <body>
     <header class="site-header">
@@ -25,9 +25,11 @@
       <div class="header-actions">
         <nav class="nav" aria-label="Primary navigation">
           <a href="#motivation">Motivation</a>
+          <a href="#abstract">Abstract</a>
           <a href="#findings">Findings</a>
           <a href="#setup">Setup</a>
           <a href="#results">Results</a>
+          <a href="#cite">Cite</a>
           <a href="#resources">Resources</a>
         </nav>
         <div class="theme-toggle" role="group" aria-label="Color theme">
@@ -55,16 +57,20 @@
     <main id="top">
       <section class="hero">
         <div class="hero-copy">
-          <p class="eyebrow">Controlled student-teacher feedback evaluation</p>
+          <p class="eyebrow">Accepted to RLxF: Reinforcement Learning from World Feedback</p>
           <h1>What Drives Interactive Improvement from Feedback?</h1>
+          <p class="author-line">
+            Bartlomiej Cupial · Jan Lojek · Mikolaj Garstecki · Szymon Poblocki · Alicja
+            Ziarko · Piotr Milos
+          </p>
           <p class="lead">
-            In multi-turn tasks, a model can get another attempt after receiving feedback. The hard
-            question is whether it improved because the feedback was useful, or simply because it got
-            more inference time. We isolate that difference across four verifiable reasoning
-            environments and thirteen open-weight model families.
+            Multi-turn language agents often get better after feedback. But how much of that
+            improvement actually comes from the feedback, rather than from another sample, format
+            repair, or extra test-time compute?
           </p>
           <div class="actions">
             <a class="button primary" href="assets/paper.pdf?v=publication">Read paper</a>
+            <a class="button" href="https://github.com/BartekCupial/plan-crl">Code</a>
             <a class="button" href="#findings">View findings</a>
           </div>
           <dl class="hero-stats" aria-label="Paper scale">
@@ -101,47 +107,49 @@
           <div class="section-label">Motivation</div>
           <h2 id="motivation-title">Feedback is becoming a training signal, but the loop itself is under-measured.</h2>
           <p>
-            Interactive feedback is attractive because it resembles how people debug math solutions,
-            programs, and plans: try, observe what failed, revise, and try again. That same loop could
-            become a way to train models that follow instructions and recover from mistakes in
-            context.
+            Feedback is central to how we want language agents to behave. A coding agent should learn
+            from test failures, a computer-use agent should react to what changed on the screen, and
+            an assistant should revise its plan when a user points out a missing constraint.
           </p>
           <p>
-            The missing piece is diagnostic. Most work focuses on the final student, the stronger
-            model being distilled, or the verifier. We instead ask what happens inside the feedback
-            step: when does a teacher's message contain information the student can actually use?
+            But evaluating this ability is subtle. When a model improves on its second or third
+            attempt, the improvement may not come from feedback at all. The model may simply be
+            resampling, fixing its output format, or benefiting from extra inference compute.
           </p>
         </div>
         <div class="story-card">
-          <h3>Evaluation setting</h3>
+          <h3>Two bottlenecks inside the loop</h3>
           <p>
-            We evaluate a simple interaction: a student attempts a task, a verifier checks it, a
-            teacher gives feedback, and the student retries from the same task. The study separates
-            three effects that are easy to conflate.
+            A teacher may fail to diagnose the relevant mistake or phrase feedback in a useful way.
+            Alternatively, the teacher may give a good hint, but the student may fail to translate
+            that hint into a better solution.
           </p>
           <ol>
-            <li>Repeated attempts without real feedback.</li>
-            <li>The student's ability to act on feedback.</li>
-            <li>The teacher's ability to diagnose the failed attempt.</li>
+            <li>Separate trying again from using feedback.</li>
+            <li>Measure the student's ability to act on feedback.</li>
+            <li>Measure the teacher's ability to diagnose the failed attempt.</li>
           </ol>
         </div>
       </section>
 
-      <section class="section compact" aria-labelledby="abstract-title">
+      <section id="abstract" class="section compact" aria-labelledby="abstract-title">
         <div class="section-label">Abstract</div>
         <div class="abstract-card">
           <h2 id="abstract-title">Multi-turn improvement is not always feedback use.</h2>
           <p>
-            We introduce a controlled student-teacher protocol across Omni-MATH, Codeforces, BBEH
-            Linguini, and ARC-AGI1. We compare external feedback, self-feedback, and unguided
-            self-refinement while varying interaction history, task difficulty, and teacher access to
-            privileged task information.
+            Language agents are increasingly used in settings where they do not answer once and stop.
+            They write code, inspect errors, revise plans, respond to user corrections, and try
+            again. In these interactions, feedback can identify what went wrong, point to a missing
+            constraint, or suggest a better direction. But multi-turn improvement is ambiguous: a
+            model may improve because it used the feedback, or simply because it sampled another
+            attempt.
           </p>
           <p>
-            Across settings, self-generated feedback often adds little beyond retrying from scratch,
-            while the strongest external teachers produce substantially larger feedback-specific
-            gains. Dense model matrices show that interactive gains are driven more by the student's
-            ability to use feedback than by the teacher's identity.
+            We study this ambiguity with a controlled student-teacher protocol across Omni-MATH,
+            Codeforces, BBEH Linguini, and ARC-AGI1. Our results separate trying again from using
+            feedback: repeated sampling explains a large part of observed gains, self-feedback adds
+            little or inconsistent benefit over unguided self-refinement, and only the strongest
+            external teachers produce noticeable teaching lift.
           </p>
         </div>
       </section>
@@ -193,18 +201,19 @@
           </article>
           <article class="finding-card">
             <span>RF5</span>
-            <h3>Longer histories are mostly flat in the completed Gemma4 grid.</h3>
+            <h3>Longer histories help only when models can use them.</h3>
             <p>
-              Extra visible turns can expose repeated failures, but the completed Gemma4 ablation shows
-              near-flat average AUC from max history 1 to 5 across the four environments.
+              Extra visible turns expose repeated failures, but they also increase cost and context
+              pressure. The Gemma4 ablation shows larger jumps only in selected settings, especially
+              Codeforces and stronger teacher-student pairs.
             </p>
           </article>
           <article class="finding-card">
             <span>RF6</span>
             <h3>Privileged teacher information is not uniformly useful.</h3>
             <p>
-              Answer access strongly helps BBEH Linguini, barely moves ARC-AGI1, and gives moderate
-              gains on Omni-MATH and Codeforces execution-feedback variants.
+              Answer access strongly helps BBEH Linguini, gives a smaller but measurable ARC-AGI1
+              lift, and has moderate effects on Omni-MATH and Codeforces execution-feedback variants.
             </p>
           </article>
         </div>
@@ -219,6 +228,11 @@
             the answer is wrong, a teacher sees the latest attempt, selected interaction history, and
             optional privileged information, then writes natural-language feedback. The student tries
             again until success or the interaction budget is exhausted.
+          </p>
+          <p>
+            The protocol varies the student, the teacher, the number of turns, visible interaction
+            history, and whether the teacher has access to privileged task information such as an
+            answer, a solution, or execution feedback.
           </p>
           <div class="pill-row" aria-label="Evaluation environments">
             <span>Omni-MATH</span>
@@ -327,7 +341,8 @@
               />
             </a>
             <figcaption>
-              Max-history 1 to 5 is largely flat in the completed Gemma4 ablation.
+              Longer visible histories help selectively, with the largest gains in settings where
+              repeated failures are informative.
             </figcaption>
           </figure>
           <figure class="figure-card">
@@ -338,7 +353,8 @@
               />
             </a>
             <figcaption>
-              Teacher-side information helps selectively: large on BBEH, essentially zero on ARC-AGI.
+              Teacher-side information helps selectively: large on BBEH, smaller but measurable on
+              ARC-AGI1.
             </figcaption>
           </figure>
         </div>
@@ -419,6 +435,27 @@
         </div>
       </section>
 
+      <section id="cite" class="section split" aria-labelledby="cite-title">
+        <div>
+          <div class="section-label">Cite this work</div>
+          <h2 id="cite-title">Use the project page and paper together.</h2>
+          <p>
+            The paper contains the full experimental protocol, dense matrices, ablations, and
+            appendix tables. The project page is the compact entry point for the main research
+            question and figures.
+          </p>
+        </div>
+        <div class="cite-card">
+          <pre><code>@misc{cupial2026interactivefeedback,
+  title = {What Drives Interactive Improvement from Feedback?},
+  author = {Cupial, Bartlomiej and Lojek, Jan and Garstecki, Mikolaj and
+            Poblocki, Szymon and Ziarko, Alicja and Milos, Piotr},
+  year = {2026},
+  note = {Accepted to RLxF: Reinforcement Learning from World Feedback}
+}</code></pre>
+        </div>
+      </section>
+
       <section id="resources" class="section resources" aria-labelledby="resources-title">
         <div>
           <div class="section-label">Resources</div>
@@ -433,6 +470,7 @@
           <a href="https://github.com/BartekCupial/plan-crl">Code</a>
           <a href="#setup">Evaluation protocol</a>
           <a href="#results">Main figures</a>
+          <a href="#cite">BibTeX</a>
         </div>
       </section>
     </main>
@@ -457,7 +495,7 @@
         </div>
       </figure>
     </div>
-    <script src="script.js?v=6"></script>
+    <script src="script.js?v=7"></script>
   </body>
 </html>
 
