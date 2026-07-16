@@ -156,7 +156,7 @@ a {
 }
 
 .hero-copy {
-  max-width: 1040px;
+  max-width: none;
   min-width: 0;
 }
 
@@ -179,7 +179,7 @@ p {
 
 h1 {
   margin-bottom: 22px;
-  max-width: 1040px;
+  max-width: none;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(42px, 6.2vw, 76px);
   line-height: 0.98;
@@ -215,7 +215,7 @@ h3 {
 }
 
 .author-line {
-  max-width: 900px;
+  max-width: none;
   margin: -8px 0 20px;
   color: var(--muted);
   font-size: 15px;
