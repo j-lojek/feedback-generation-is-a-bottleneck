@@ -6,7 +6,6 @@ const lightboxImage = document.querySelector(".lightbox-image");
 const lightboxTitle = document.querySelector("#lightbox-title");
 const lightboxClose = document.querySelector(".lightbox-close");
 const lightboxBackdrop = document.querySelector(".lightbox-backdrop");
-const lightboxMedia = document.querySelector(".lightbox-media");
 let activeFigureLink = null;
 
 function storedTheme() {
@@ -54,7 +53,6 @@ function openLightbox(link) {
   lightbox.classList.add("is-open");
   lightbox.setAttribute("aria-hidden", "false");
   document.body.classList.add("lightbox-open");
-  requestAnimationFrame(updateLightboxImageLimit);
   lightboxClose?.focus();
 }
 
@@ -68,15 +66,6 @@ function closeLightbox() {
   activeFigureLink = null;
 }
 
-function updateLightboxImageLimit() {
-  if (!lightbox?.classList.contains("is-open") || !lightboxMedia || !lightboxImage) return;
-  const mediaStyle = getComputedStyle(lightboxMedia);
-  const verticalPadding =
-    parseFloat(mediaStyle.paddingTop || "0") + parseFloat(mediaStyle.paddingBottom || "0");
-  const availableHeight = Math.max(180, lightboxMedia.clientHeight - verticalPadding - 2);
-  lightboxImage.style.setProperty("--lightbox-image-max-height", `${availableHeight}px`);
-}
-
 document.querySelectorAll(".figure-link").forEach((link) => {
   link.addEventListener("click", (event) => {
     event.preventDefault();
@@ -86,8 +75,6 @@ document.querySelectorAll(".figure-link").forEach((link) => {
 
 lightboxClose?.addEventListener("click", closeLightbox);
 lightboxBackdrop?.addEventListener("click", closeLightbox);
-lightboxImage?.addEventListener("load", updateLightboxImageLimit);
-window.addEventListener("resize", updateLightboxImageLimit);
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && lightbox?.classList.contains("is-open")) {
