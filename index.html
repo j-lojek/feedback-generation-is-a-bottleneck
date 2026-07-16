@@ -14,7 +14,7 @@
       content="Multi-turn improvement is not always feedback use. We separate feedback from repeated attempts in controlled student-teacher evaluations."
     />
     <meta property="og:type" content="website" />
-    <link rel="stylesheet" href="styles.css?v=9" />
+    <link rel="stylesheet" href="styles.css?v=10" />
   </head>
   <body>
     <header class="site-header">
@@ -70,52 +70,54 @@
             <a class="button" href="https://github.com/BartekCupial/feedback-bottleneck/">Code</a>
           </div>
         </div>
-        <figure class="hero-figure">
-          <a class="figure-link" href="assets/teaser_gemma4_bbeh_linguini.png">
-            <img
-              src="assets/teaser_gemma4_bbeh_linguini.png"
-              alt="Cumulative accuracy by student attempt for Gemma4 students and teachers on BBEH Linguini."
-            />
-          </a>
-          <figcaption>
-            Multi-turn trajectories separate mostly by student. Strong teachers can help (for
-            example Gemma4-31b), but the dominant pattern is that some students are much better at
-            converting feedback into progress.
-          </figcaption>
-        </figure>
       </section>
 
       <section id="abstract" class="section compact" aria-labelledby="abstract-title">
         <div class="section-label">Abstract</div>
-        <div class="prose-column">
-          <h2 id="abstract-title">Multi-turn improvement is not always feedback use.</h2>
-          <p>
-            Language agents are increasingly used in settings where they do not answer once and
-            stop. They write code, inspect errors, revise plans, respond to user corrections, and
-            try again. In these interactions, feedback can be genuinely useful: it can identify what
-            went wrong, point to a missing constraint, or suggest a better direction. But multi-turn
-            improvement is ambiguous. A model may improve because it used the feedback, or simply
-            because it sampled another attempt with more test-time computation.
-          </p>
-          <p>
-            We study multi-turn improvement with a controlled student-teacher protocol. In each
-            episode, a student model attempts a problem. If the answer is wrong, a teacher model
-            gives natural-language feedback without revealing the final answer, and the student
-            revises. We compare external feedback, self-feedback, and unguided self-refinement across
-            Omni-MATH, Codeforces, BBEH Linguini, and ARC-AGI-1, evaluating thirteen open-weight
-            models as both students and teachers.
-          </p>
-          <p>
-            Our results separate trying again from using feedback. Repeated sampling explains a
-            large part of the observed gains, while self-feedback adds little or inconsistent benefit
-            over unguided self-refinement. Only the strongest external teachers start producing
-            noticeable teaching lift, suggesting that useful teaching requires more than noticing
-            that an answer is wrong: the teacher must diagnose the error, phrase a correction, and
-            give guidance the student can actually use. Teaching may therefore be harder than
-            verification, and possibly closer to, or harder than, generation itself. At the same
-            time, students remain the most important factor: strong teachers can help, but
-            multi-turn trajectories are separated mostly by students.
-          </p>
+        <div class="abstract-layout">
+          <div class="prose-column">
+            <h2 id="abstract-title">Multi-turn improvement is not always feedback use.</h2>
+            <p>
+              Language agents are increasingly used in settings where they do not answer once and
+              stop. They write code, inspect errors, revise plans, respond to user corrections, and
+              try again. In these interactions, feedback can be genuinely useful: it can identify what
+              went wrong, point to a missing constraint, or suggest a better direction. But multi-turn
+              improvement is ambiguous. A model may improve because it used the feedback, or simply
+              because it sampled another attempt with more test-time computation.
+            </p>
+            <p>
+              We study multi-turn improvement with a controlled student-teacher protocol. In each
+              episode, a student model attempts a problem. If the answer is wrong, a teacher model
+              gives natural-language feedback without revealing the final answer, and the student
+              revises. We compare external feedback, self-feedback, and unguided self-refinement across
+              Omni-MATH, Codeforces, BBEH Linguini, and ARC-AGI-1, evaluating thirteen open-weight
+              models as both students and teachers.
+            </p>
+            <p>
+              Our results separate trying again from using feedback. Repeated sampling explains a
+              large part of the observed gains, while self-feedback adds little or inconsistent benefit
+              over unguided self-refinement. Only the strongest external teachers start producing
+              noticeable teaching lift, suggesting that useful teaching requires more than noticing
+              that an answer is wrong: the teacher must diagnose the error, phrase a correction, and
+              give guidance the student can actually use. Teaching may therefore be harder than
+              verification, and possibly closer to, or harder than, generation itself. At the same
+              time, students remain the most important factor: strong teachers can help, but
+              multi-turn trajectories are separated mostly by students.
+            </p>
+          </div>
+          <figure class="abstract-figure">
+            <a class="figure-link" href="assets/teaser_gemma4_bbeh_linguini.png">
+              <img
+                src="assets/teaser_gemma4_bbeh_linguini.png"
+                alt="Cumulative accuracy by student attempt for Gemma4 students and teachers on BBEH Linguini."
+              />
+            </a>
+            <figcaption>
+              Multi-turn trajectories separate mostly by student. Strong teachers can help (for
+              example Gemma4-31b), but the dominant pattern is that some students are much better at
+              converting feedback into progress.
+            </figcaption>
+          </figure>
         </div>
       </section>
 

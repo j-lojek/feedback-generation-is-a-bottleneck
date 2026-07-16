@@ -152,14 +152,11 @@ a {
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 520px) minmax(420px, 1fr);
-  gap: clamp(40px, 5vw, 72px);
-  align-items: center;
-  padding: 72px 0 50px;
+  padding: 64px 0 44px;
 }
 
 .hero-copy {
+  max-width: 1040px;
   min-width: 0;
 }
 
@@ -182,7 +179,7 @@ p {
 
 h1 {
   margin-bottom: 22px;
-  max-width: 560px;
+  max-width: 1040px;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(42px, 6.2vw, 76px);
   line-height: 0.98;
@@ -214,7 +211,7 @@ h3 {
 }
 
 .author-line {
-  max-width: 560px;
+  max-width: 900px;
   margin: -8px 0 20px;
   color: var(--muted);
   font-size: 15px;
@@ -230,7 +227,7 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin: 28px 0 34px;
+  margin: 28px 0 0;
 }
 
 .button {
@@ -286,20 +283,20 @@ h3 {
   font-size: 13px;
 }
 
-.hero-figure,
+.abstract-figure,
 .figure-card {
   margin: 0;
   overflow: hidden;
   box-shadow: var(--shadow);
 }
 
-.hero-figure {
+.abstract-figure {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--paper);
 }
 
-.hero-figure img {
+.abstract-figure img {
   width: 100%;
   padding: 24px 20px 8px;
   background: white;
@@ -319,7 +316,7 @@ h3 {
   transform: scale(1.01);
 }
 
-:root[data-color-scheme="dark"] .hero-figure img,
+:root[data-color-scheme="dark"] .abstract-figure img,
 :root[data-color-scheme="dark"] .figure-card img,
 :root[data-color-scheme="dark"] .lightbox-image {
   filter: invert(0.94) hue-rotate(180deg) saturate(0.95) contrast(0.95);
@@ -337,6 +334,17 @@ figcaption {
 
 .section.compact {
   padding-top: 20px;
+}
+
+.abstract-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(380px, 0.92fr);
+  gap: clamp(28px, 4vw, 52px);
+  align-items: start;
+}
+
+.abstract-layout .prose-column {
+  max-width: none;
 }
 
 .section-heading {
@@ -407,9 +415,14 @@ figcaption {
   overflow: auto;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: #171717;
-  color: #f7f5ef;
+  background: #fff;
+  color: #171717;
   box-shadow: var(--shadow);
+}
+
+:root[data-color-scheme="dark"] .cite-card {
+  background: var(--paper);
+  color: var(--ink);
 }
 
 .cite-card pre {
@@ -740,26 +753,17 @@ body.lightbox-open {
 }
 
 @media (max-width: 1180px) {
-  .hero {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-
-  h1 {
-    max-width: 820px;
-  }
-
   .lead {
     max-width: 760px;
   }
 
-  .hero-figure {
+  .abstract-figure {
     max-width: 760px;
   }
 }
 
 @media (max-width: 920px) {
-  .hero,
+  .abstract-layout,
   .split,
   .split.reverse,
   .section-heading,
