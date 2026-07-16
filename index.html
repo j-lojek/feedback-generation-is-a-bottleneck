@@ -14,7 +14,7 @@
       content="Multi-turn improvement is not always feedback use. We separate feedback from repeated attempts in controlled student-teacher evaluations."
     />
     <meta property="og:type" content="website" />
-    <link rel="stylesheet" href="styles.css?v=13" />
+    <link rel="stylesheet" href="styles.css?v=14" />
   </head>
   <body>
     <header class="site-header">
@@ -153,9 +153,9 @@
 
       <section id="setup" class="section" aria-labelledby="setup-title">
         <div class="section-label">Experimental setup</div>
+        <h2 id="setup-title" class="setup-title">A verifier-grounded feedback loop.</h2>
         <div class="split">
           <div>
-            <h2 id="setup-title">A verifier-grounded feedback loop.</h2>
             <p>
               Each episode starts with a problem and a student model. The student produces an
               attempt, and a task-specific verifier checks whether the answer is correct. If the
@@ -325,17 +325,15 @@
     <div class="lightbox" aria-hidden="true">
       <button class="lightbox-backdrop" type="button" aria-label="Close expanded figure"></button>
       <figure class="lightbox-panel" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
-        <div class="lightbox-toolbar">
-          <figcaption id="lightbox-title">Expanded figure</figcaption>
-          <button class="lightbox-close" type="button" aria-label="Close expanded figure">
-            <svg aria-hidden="true" viewBox="0 0 24 24">
-              <path d="M6 6l12 12M18 6 6 18" />
-            </svg>
-          </button>
-        </div>
+        <button class="lightbox-close" type="button" aria-label="Close expanded figure">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M6 6l12 12M18 6 6 18" />
+          </svg>
+        </button>
         <div class="lightbox-media">
           <img class="lightbox-image" alt="" />
         </div>
+        <figcaption id="lightbox-title" class="lightbox-caption">Expanded figure</figcaption>
       </figure>
     </div>
     <script src="script.js?v=7"></script>
