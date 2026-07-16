@@ -156,7 +156,6 @@ a {
   grid-template-columns: minmax(0, 520px) minmax(420px, 1fr);
   gap: clamp(40px, 5vw, 72px);
   align-items: center;
-  min-height: calc(100vh - 76px);
   padding: 72px 0 50px;
 }
 
@@ -223,7 +222,6 @@ h3 {
 }
 
 :root[data-color-scheme="dark"] .lead,
-:root[data-color-scheme="dark"] .abstract-card p,
 :root[data-color-scheme="dark"] .check-list li {
   color: #d2d4cf;
 }
@@ -264,7 +262,6 @@ h3 {
 
 .hero-stats div,
 .summary-card,
-.abstract-card,
 .finding-card,
 .story-card,
 .figure-card,
@@ -340,16 +337,6 @@ figcaption {
 
 .section.compact {
   padding-top: 20px;
-}
-
-.abstract-card {
-  padding: clamp(22px, 4vw, 38px);
-}
-
-.abstract-card p {
-  max-width: 980px;
-  color: #343735;
-  font-size: 18px;
 }
 
 .section-heading {
