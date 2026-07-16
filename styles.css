@@ -367,6 +367,15 @@ figcaption {
   font-size: 17px;
 }
 
+.prose-column {
+  max-width: 900px;
+}
+
+.prose-column p {
+  color: var(--muted);
+  font-size: 17px;
+}
+
 .finding-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -391,6 +400,15 @@ figcaption {
 .finding-card p {
   margin-bottom: 0;
   color: var(--muted);
+}
+
+.setup-cards,
+.results-findings {
+  margin-top: 24px;
+}
+
+.results-findings {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .story-card {
@@ -491,6 +509,14 @@ table {
   background: var(--paper);
 }
 
+caption {
+  padding: 18px;
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 15px;
+  text-align: left;
+}
+
 th,
 td {
   padding: 15px 18px;
@@ -523,6 +549,11 @@ tbody tr:last-child td {
 
 .figure-card.wide {
   grid-column: 1 / -1;
+}
+
+.result-figure {
+  max-width: 920px;
+  margin: 24px auto 0;
 }
 
 .matrix-grid {
@@ -759,6 +790,7 @@ body.lightbox-open {
   }
 
   .finding-grid,
+  .results-findings,
   .matrix-grid,
   .figure-grid {
     grid-template-columns: 1fr;
