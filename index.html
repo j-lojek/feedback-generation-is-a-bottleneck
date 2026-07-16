@@ -14,7 +14,7 @@
       content="Multi-turn improvement is not always feedback use. We separate feedback from repeated attempts in controlled student-teacher evaluations."
     />
     <meta property="og:type" content="website" />
-    <link rel="stylesheet" href="styles.css?v=10" />
+    <link rel="stylesheet" href="styles.css?v=11" />
   </head>
   <body>
     <header class="site-header">
@@ -56,7 +56,10 @@
       <section class="hero">
         <div class="hero-copy">
           <p class="eyebrow">Accepted to RLxF: Reinforcement Learning from World Feedback.</p>
-          <h1>What Drives Interactive Improvement from Feedback?</h1>
+          <h1>
+            <span class="title-line">What Drives Interactive</span>
+            <span class="title-line">Improvement from Feedback?</span>
+          </h1>
           <p class="author-line">
             Bartłomiej Cupiał · Jan Łojek · Mikołaj Garstecki · Szymon Pobłocki · Alicja
             Ziarko · Piotr Miłoś
@@ -74,37 +77,8 @@
 
       <section id="abstract" class="section compact" aria-labelledby="abstract-title">
         <div class="section-label">Abstract</div>
-        <div class="abstract-layout">
-          <div class="prose-column">
-            <h2 id="abstract-title">Multi-turn improvement is not always feedback use.</h2>
-            <p>
-              Language agents are increasingly used in settings where they do not answer once and
-              stop. They write code, inspect errors, revise plans, respond to user corrections, and
-              try again. In these interactions, feedback can be genuinely useful: it can identify what
-              went wrong, point to a missing constraint, or suggest a better direction. But multi-turn
-              improvement is ambiguous. A model may improve because it used the feedback, or simply
-              because it sampled another attempt with more test-time computation.
-            </p>
-            <p>
-              We study multi-turn improvement with a controlled student-teacher protocol. In each
-              episode, a student model attempts a problem. If the answer is wrong, a teacher model
-              gives natural-language feedback without revealing the final answer, and the student
-              revises. We compare external feedback, self-feedback, and unguided self-refinement across
-              Omni-MATH, Codeforces, BBEH Linguini, and ARC-AGI-1, evaluating thirteen open-weight
-              models as both students and teachers.
-            </p>
-            <p>
-              Our results separate trying again from using feedback. Repeated sampling explains a
-              large part of the observed gains, while self-feedback adds little or inconsistent benefit
-              over unguided self-refinement. Only the strongest external teachers start producing
-              noticeable teaching lift, suggesting that useful teaching requires more than noticing
-              that an answer is wrong: the teacher must diagnose the error, phrase a correction, and
-              give guidance the student can actually use. Teaching may therefore be harder than
-              verification, and possibly closer to, or harder than, generation itself. At the same
-              time, students remain the most important factor: strong teachers can help, but
-              multi-turn trajectories are separated mostly by students.
-            </p>
-          </div>
+        <div class="abstract-body">
+          <h2 id="abstract-title">Multi-turn improvement is not always feedback use.</h2>
           <figure class="abstract-figure">
             <a class="figure-link" href="assets/teaser_gemma4_bbeh_linguini.png">
               <img
@@ -118,6 +92,33 @@
               converting feedback into progress.
             </figcaption>
           </figure>
+          <p>
+            Language agents are increasingly used in settings where they do not answer once and
+            stop. They write code, inspect errors, revise plans, respond to user corrections, and
+            try again. In these interactions, feedback can be genuinely useful: it can identify what
+            went wrong, point to a missing constraint, or suggest a better direction. But multi-turn
+            improvement is ambiguous. A model may improve because it used the feedback, or simply
+            because it sampled another attempt with more test-time computation.
+          </p>
+          <p>
+            We study multi-turn improvement with a controlled student-teacher protocol. In each
+            episode, a student model attempts a problem. If the answer is wrong, a teacher model
+            gives natural-language feedback without revealing the final answer, and the student
+            revises. We compare external feedback, self-feedback, and unguided self-refinement across
+            Omni-MATH, Codeforces, BBEH Linguini, and ARC-AGI-1, evaluating thirteen open-weight
+            models as both students and teachers.
+          </p>
+          <p>
+            Our results separate trying again from using feedback. Repeated sampling explains a
+            large part of the observed gains, while self-feedback adds little or inconsistent benefit
+            over unguided self-refinement. Only the strongest external teachers start producing
+            noticeable teaching lift, suggesting that useful teaching requires more than noticing
+            that an answer is wrong: the teacher must diagnose the error, phrase a correction, and
+            give guidance the student can actually use. Teaching may therefore be harder than
+            verification, and possibly closer to, or harder than, generation itself. At the same
+            time, students remain the most important factor: strong teachers can help, but
+            multi-turn trajectories are separated mostly by students.
+          </p>
         </div>
       </section>
 
