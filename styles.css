@@ -551,11 +551,6 @@ tbody tr:last-child td {
   grid-column: 1 / -1;
 }
 
-.result-figure {
-  max-width: 920px;
-  margin: 24px auto 0;
-}
-
 .matrix-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
