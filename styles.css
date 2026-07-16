@@ -297,7 +297,7 @@ h3 {
 .abstract-figure {
   float: right;
   width: min(46%, 520px);
-  margin: 0 0 24px 40px;
+  margin: 16px 0 24px 40px;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--paper);
@@ -752,6 +752,14 @@ body.lightbox-open {
 @media (min-width: 921px) {
   .setup-title {
     white-space: nowrap;
+  }
+
+  .setup-layout {
+    align-items: start;
+  }
+
+  .setup-layout > .figure-card {
+    margin-top: 16px;
   }
 }
 
